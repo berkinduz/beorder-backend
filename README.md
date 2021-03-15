@@ -15,3 +15,9 @@ Node JS
 <div>
     modellerin REST API'leri express yardımıyla index.js dosyası içerisinde oluşturuldu. Route'ler belirtildi.
 </div>
+<div>
+    register işlemlerinde password hashing işlemi yapıldı. Bu işlem için postgre'nin pgcrypto modülü kullanıldı.
+</div>
+<div>
+    login API'si oluşturuldu
+</div>
