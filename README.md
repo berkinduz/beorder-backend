@@ -21,3 +21,6 @@ Node JS
 <div>
     login API'si oluşturuldu
 </div>
+<div>
+    login API'sine JWT kullanılarak post anında token oluşturularak db'ye eklendi. 
+</div>
