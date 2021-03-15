@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = 3000;
 const test = require('./middlewares/test');
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({

@@ -32,7 +32,7 @@ const createUser = (request, response) => {
   } = request.body;
 
   pool.query(
-    "INSERT INTO users (name, lastname, phone_num, email, password, role, status) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id",
+    "INSERT INTO users (name, lastname, phone_num, email, password, role, status) VALUES ($1, $2, $3, $4, crypt($5,gen_salt('bf')), $6, $7) RETURNING id",
     [name, lastname, phone_num, email, password, role, status],
     (error, results) => {
       if (error) {
