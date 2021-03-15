@@ -1,4 +1,6 @@
 const pool = require("../config");
+const jwt = require("jsonwebtoken");
+const express = require("express");
 
 const getUsers = (request, response) => {
   pool.query("SELECT * FROM users ORDER BY id ASC", (error, results) => {
@@ -48,17 +50,30 @@ const userLogin = (request, response) => {
 
   pool.query(
     "SELECT id FROM users WHERE email = $1 AND password = crypt($2, password)",
-    [email , password],
+    [email, password],
     (error, results) => {
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
       try {
-        response.status(201).send(`Welcome Back: ${results.rows[0].id} `);
+        userID = results.rows[0].id;
+        let token = jwt.sign(userID, "asd");
+
+        pool.query(
+          "UPDATE users SET token = $1 WHERE id = $2 ",
+          [token, userID],
+          (error, res) => {
+            if (error) throw error;
+            response
+              .status(201)
+              .json({
+                success: true,
+                message: "Giriş başarılı, token yaratıldı.",
+                token,
+              });
+          }
+        );
       } catch (error) {
-        response.send('Wrong e-mail or password');
+        response.send("Wrong e-mail or password");
       }
-      
     }
   );
 };
