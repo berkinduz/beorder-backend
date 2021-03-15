@@ -43,8 +43,29 @@ const createUser = (request, response) => {
   );
 };
 
+const userLogin = (request, response) => {
+  const { email, password } = request.body;
+
+  pool.query(
+    "SELECT id FROM users WHERE email = $1 AND password = crypt($2, password)",
+    [email , password],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      try {
+        response.status(201).send(`Welcome Back: ${results.rows[0].id} `);
+      } catch (error) {
+        response.send('Wrong e-mail or password');
+      }
+      
+    }
+  );
+};
+
 module.exports = {
   getUsers,
   getUserById,
   createUser,
+  userLogin,
 };

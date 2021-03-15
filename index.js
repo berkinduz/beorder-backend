@@ -17,6 +17,7 @@ const materialTable = require("./queries/material");
 app.get("/users", test, userTable.getUsers);
 app.get("/users/:id", userTable.getUserById);
 app.post("/users/register", userTable.createUser);
+app.post("/users/login", userTable.userLogin);
 
 app.get("/materials", materialTable.getMaterials);
 app.get("/materials/:id", materialTable.getMaterialById);
