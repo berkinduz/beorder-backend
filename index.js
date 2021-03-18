@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const port = 3000;
-const test = require('./middlewares/test');
+const auth = require('./middlewares/auth');
+const cookieParser = require('cookie-parser');
 
 app.use(bodyParser.json());
 app.use(
@@ -10,17 +11,22 @@ app.use(
     extended: true,
   })
 );
+app.use(cookieParser());
 
 const userTable = require("./queries/users");
 const materialTable = require("./queries/material");
 
-app.get("/users", test, userTable.getUsers);
+app.get("/users", userTable.getUsers);
 app.get("/users/:id", userTable.getUserById);
 app.post("/users/register", userTable.createUser);
-app.post("/users/login", userTable.userLogin);
+app.post("/login", userTable.userLogin);
+app.get("/logout", auth, userTable.userLogout);
 
-app.get("/materials", materialTable.getMaterials);
+
+app.get("/materials", auth, materialTable.getMaterials);
 app.get("/materials/:id", materialTable.getMaterialById);
+
+
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
