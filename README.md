@@ -24,3 +24,6 @@ Node JS
 <div>
     login API'sine JWT kullanılarak post anında token oluşturularak db'ye eklendi. 
 </div>
+<div>
+    auth middlewaresi oluşturuldu. logout API'si oluşturuldu.
+</div>
