@@ -25,6 +25,7 @@ app.get("/logout", auth, userTable.userLogout);
 
 app.get("/materials", auth, materialTable.getMaterials);
 app.get("/materials/:id", materialTable.getMaterialById);
+app.post("/material/post", auth, materialTable.createMaterial);
 
 
 
