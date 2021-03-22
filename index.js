@@ -16,6 +16,7 @@ app.use(cookieParser());
 const userTable = require("./queries/users");
 const materialTable = require("./queries/material");
 const companyTable = require("./queries/company");
+const productTable = require("./queries/product");
 
 app.get("/users", userTable.getUsers);
 app.get("/users/:id", userTable.getUserById);
@@ -33,6 +34,8 @@ app.get("/companies", companyTable.getCompany);
 app.get("/companies/:id", companyTable.getCompanyById);
 app.post("/company/post", companyTable.createCompany);
 
+app.get("/products", productTable.getProduct);
+app.get("/products/:id", productTable.getProductById);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
