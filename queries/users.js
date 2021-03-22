@@ -2,8 +2,8 @@ const pool = require("../config");
 const jwt = require("jsonwebtoken");
 const express = require("express");
 const bodyParser = require("body-parser");
-const cookieParser = require('cookie-parser');
-const auth = require('../middlewares/auth');
+const cookieParser = require("cookie-parser");
+const auth = require("../middlewares/auth");
 
 const getUsers = (request, response) => {
   pool.query("SELECT * FROM users ORDER BY id ASC", (error, results) => {
@@ -59,7 +59,7 @@ const userLogin = (request, response) => {
       try {
         //login başarılı
         userID = results.rows[0].id;
-        let token = jwt.sign(userID, "asd"); 
+        let token = jwt.sign(userID, "asd");
         pool.query(
           "UPDATE users SET token = $1 WHERE id = $2 ",
           [token, userID],
@@ -78,16 +78,22 @@ const userLogin = (request, response) => {
   );
 };
 
-const userLogout = (req,res) => {
-
+const userLogout = (req, res) => {
   console.log(req.cookies.u_auth);
   myID = jwt.decode(req.cookies.u_auth);
   console.log(myID);
+  res.cookie("u_auth", "");
 
-  pool.query("UPDATE users SET token = $1 WHERE id = $2", ['', parseInt(myID)], (error,result) => {
-    if(error) return error;
-    return res.status(200).send({success: true});
-  })
+  pool.query(
+    "UPDATE users SET token = $1 WHERE id = $2",
+    ["", parseInt(myID)],
+    (error, result) => {
+      if (error) return error;
+      else {
+        return res.status(200).send({ success: true });
+      }
+    }
+  );
 };
 
 module.exports = {
@@ -95,5 +101,5 @@ module.exports = {
   getUserById,
   createUser,
   userLogin,
-  userLogout
+  userLogout,
 };
