@@ -1,10 +1,10 @@
-Beorder app backend development. 
+Beorder app backend development.
 with
 
 PostgreSQL
 Node JS
-    Express
-    Body Parser
+Express
+Body Parser
 
 <div>
     config.js dosyası ile db bağlantısı yapıldı.
@@ -26,4 +26,10 @@ Node JS
 </div>
 <div>
     auth middlewaresi oluşturuldu. logout API'si oluşturuldu.
+</div>
+<div>
+    company modeli oluşturuldu, get ve post API'leri oluşturuldu.
+</div>
+<div>
+    superadmin middlewaresi oluşturuldu.
 </div>
