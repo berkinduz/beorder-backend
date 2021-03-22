@@ -15,10 +15,11 @@ app.use(cookieParser());
 
 const userTable = require("./queries/users");
 const materialTable = require("./queries/material");
+const companyTable = require("./queries/company");
 
 app.get("/users", userTable.getUsers);
 app.get("/users/:id", userTable.getUserById);
-app.post("/users/register", userTable.createUser);
+app.post("/register", userTable.createUser);
 app.post("/login", userTable.userLogin);
 app.get("/logout", auth, userTable.userLogout);
 
@@ -27,6 +28,10 @@ app.get("/materials", auth, materialTable.getMaterials);
 app.get("/materials/:id", materialTable.getMaterialById);
 app.post("/material/post", auth, materialTable.createMaterial);
 
+
+app.get("/companies", companyTable.getCompany);
+app.get("/companies/:id", companyTable.getCompanyById);
+app.post("/company/post", companyTable.createCompany);
 
 
 app.listen(port, () => {
