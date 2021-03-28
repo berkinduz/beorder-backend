@@ -33,3 +33,14 @@ Body Parser
 <div>
     superadmin middlewaresi oluşturuldu.
 </div>
+<div>
+    userType modeli, get ve post API'leri oluşturuldu.
+    userType POST API'si için superadmin middleware sorgusu zorunlu kılındı.
+</div>
+<div>
+    product modeline createProduct methodu eklendi. Ancak buradaki malzeme modelinden array şeklinde item çekme durumu gözden geçirilecek.
+</div>
+<div>
+    productType modeli ve API'leri oluşturuldu.
+</div>
+
